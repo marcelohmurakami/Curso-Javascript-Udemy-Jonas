@@ -1,0 +1,1 @@
+// Fazer um programa que avalia quem é o paciente de maior risco de um hospital, onde o principal risco seria sua condição (Grave, Moderada ou Leve), em sequência sua idade e posteriormente, seu peso. Fazer um menu interativo com as seguintes opções: 1- Cadastro de pacientes, 2- Consulta de pacientes, 3- Media de idade dos pacientes, 4- Paciente com maior risco, 5- Sair.

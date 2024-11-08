@@ -1,0 +1,37 @@
+/*Implemente um sistema de gerenciamento de reservas de hotel, onde cada hóspede é identificado pelo CPF. O sistema deve permitir o cadastro e saída de hóspedes, a consulta de quartos disponíveis, e a determinação do hóspede com a estadia mais longa (com base na data de entrada).
+Funcionalidades
+1.	Cadastro de Hóspedes: O programa deve permitir o cadastro de novos hóspedes, com as seguintes informações:
+o	CPF (único para cada hóspede)
+o	Idade
+o	Número do quarto (deve ser único e disponível)
+o	Data de entrada (no formato "dd-mm-yyyy")
+2.	Saída do Hóspede: O programa deve permitir que o hóspede desocupe o quarto ao sair. O quarto deve então voltar a ser listado como disponível.
+3.	Consulta de Quartos Disponíveis: O programa deve listar todos os quartos disponíveis, de 101 a 120. Quando um quarto é desocupado, ele deve ser listado novamente como disponível.
+4.	Consulta de Hóspedes por Quarto: O programa deve exibir a lista de todos os hóspedes atualmente hospedados, mostrando o CPF, idade, quarto e data de entrada.
+5.	Hóspede com Estadia Mais Longa: O programa deve determinar qual hóspede está hospedado há mais tempo, considerando a data de entrada mais antiga.
+Requisitos:
+•	O programa deve iniciar com uma lista de quartos disponíveis numerados de 101 a 120.
+•	O usuário deve interagir com o programa através de um menu, no qual poderá escolher as seguintes opções:
+o	1: Cadastrar um novo hóspede (CPF único, e em quarto disponível).
+o	2: Registrar saída de um hóspede (desocupando o quarto).
+o	3: Listar quartos disponíveis.
+o	4: Listar todos os hóspedes atualmente hospedados.
+o	5: Determinar o hóspede com a estadia mais longa.
+o	6: Encerrar o programa.
+Regras:
+•	O CPF deve ser único para cada hóspede.
+•	A data de entrada deve ser validada para garantir o formato correto "dd-mm-yyyy".
+•	Quando o hóspede sair, o quarto deve voltar a estar disponível.
+•	Se o usuário tentar inserir uma opção inválida no menu, o programa deve exibir uma mensagem de erro e solicitar a entrada novamente.
+Funções Sugeridas:
+•	cadastraHospede(vetHospedes, quartosDisponiveis): Cadastra um novo hóspede no vetor vetHospedes, utilizando um quarto disponível.
+•	saidaHospede(vetHospedes, cpf): Remove o hóspede com o CPF fornecido da lista vetHospedes e torna o quarto ocupado por ele disponível novamente.
+•	consultaQuartosDisponiveis(quartosDisponiveis): Exibe os números dos quartos que estão livres.
+•	consultaHospedes(vetHospedes): Exibe as informações dos hóspedes atualmente no hotel.
+•	hospedeMaisTempo(vetHospedes): Determina e exibe o hóspede com a estadia mais longa, com base na data de entrada.
+Observação:
+•	Utilize a função prompt-sync para capturar as entradas do usuário.
+•	Faça a validação da data para que o formato "dd-mm-yyyy" seja corretamente inserido.
+•	Calcule o tempo de estadia com base na data de entrada e na data atual para identificar o hóspede com estadia mais longa.*/
+
+
