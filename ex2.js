@@ -35,3 +35,65 @@ Observação:
 •	Calcule o tempo de estadia com base na data de entrada e na data atual para identificar o hóspede com estadia mais longa.*/
 
 
+let hospedes = [];
+const quartos = [];
+for (let a = 101; a <= 120; a++) {
+  let quarto = {
+    numero: a,
+    disponivel: true
+  }
+  quartos.push(quarto);
+}
+
+// Função para cadastrar um hospede
+const cadastraHospede = function(){
+    let testecpf = true;
+    let testequarto = 0;
+    let cpf, idade, quarto, dataEntrada
+
+    while (testecpf === true){
+        cpf = Number(prompt("Digite o CPF do hóspede: "));
+        if (isNaN(cpf) || cpf.toString().length !== 11) {
+            console.log("CPF inválido, digite novamente!")
+        } else {
+            testecpf = false
+        }
+    }
+
+    while (testequarto === 0){
+        quarto = Number(prompt("Digite o quarto do hóspede: "));
+        if (quarto < 101 || quarto > 120){
+            console.log("Quarto inexistente!");
+            continue;
+        }
+        for (let a = 0; a < quartos.length; a++) {
+            if (quarto === quartos[a].numero && quartos[a].disponivel === true){
+                quartos[a].disponivel = false;
+                testequarto++;
+                break;
+            } else if (quarto === quartos[a].numero && quartos[a].disponivel === false){
+                console.log("Quarto indisponível, selecione outro quarto");
+                break;
+            }
+        }
+    }
+    const hospede = {
+        cpf,
+        idade: Number(prompt("Digite a idade do hospede: ")),
+        quarto,
+        dataEntrada: prompt("Digite a data de entrada (dd/mm/aaaa)")
+    }
+    hospedes.push(hospede);
+}
+
+
+//Função para cadastrar saída de um hospede
+
+
+// Função para listar quartos disponíveis
+
+
+// Função para consultar hospedes
+
+
+// Função para verificar o hospede com mais tempo de estadia
