@@ -49,7 +49,7 @@ for (let a = 101; a <= 120; a++) {
 const cadastraHospede = function(){
     let testecpf = true;
     let testequarto = 0;
-    let cpf, idade, quarto, dataEntrada
+    let cpf, idade, quarto, dataEntrada, estaHospedado
 
     while (testecpf === true){
         cpf = Number(prompt("Digite o CPF do hóspede: "));
@@ -81,19 +81,53 @@ const cadastraHospede = function(){
         cpf,
         idade: Number(prompt("Digite a idade do hospede: ")),
         quarto,
-        dataEntrada: prompt("Digite a data de entrada (dd/mm/aaaa)")
+        dataEntrada: prompt("Digite a data de entrada (dd/mm/aaaa)"),
+        estaHospedado: true
     }
     hospedes.push(hospede);
 }
 
 
 //Função para cadastrar saída de um hospede
-
+const saidaHospede = function(cpf){
+    let teste = 0;
+    for (let a = 0; a < hospedes.length; a++){
+        if (cpf === hospedes[a].cpf){
+            teste++
+            hospedes[a].estaHospedado = false;
+            console.log("Checkout realizado com sucesso!");
+            for(let b = 0; b < quartos.length; b++){
+                if (quartos[b].numero === hospedes[a].quarto){
+                    quartos[b].disponivel = true;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    if (teste === 0){
+        console.log("CPF inválido ou não cadastrado!")
+    }
+}
 
 // Função para listar quartos disponíveis
-
+const quartoDisponivel = function(quartos){
+    quartos.forEach((quarto) => {
+        if (quarto.disponivel === true){
+            console.log(`Quarto disponível: ${quarto.numero}`)
+        }
+    })
+}
 
 // Função para consultar hospedes
-
+const consulta = function(hospedes){
+    hospedes.forEach((hospede) => {
+        console.log(`O hospede de CPF ${hospede.cpf} possui ${hospede.idade} anos e ${hospede.estaHospedado ? `está hospedado no quarto ${hospede.quarto}` : `não está hospedado`}`)
+    })
+}
 
 // Função para verificar o hospede com mais tempo de estadia
+
+
+
+// Fazer menu
