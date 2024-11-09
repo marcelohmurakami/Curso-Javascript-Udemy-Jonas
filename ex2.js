@@ -127,7 +127,60 @@ const consulta = function(hospedes){
 }
 
 // Função para verificar o hospede com mais tempo de estadia
+const hospedeComMaisTempo = function(hospedes) {
+    if (hospedes.length === 0) {
+        console.log("Nenhum hóspede registrado.");
+        return null;
+    }
 
+    let hospedeComMaiorEstadia = hospedes[0];
+    let maiorTempoEstadia = (new Date() - new Date(hospedes[0].dataEntrada));
+
+    hospedes.forEach((hospede) => {
+        const tempoEstadia = new Date() - new Date(hospede.dataEntrada);
+
+        if (tempoEstadia > maiorTempoEstadia) {
+            maiorTempoEstadia = tempoEstadia;
+            hospedeComMaiorEstadia = hospede;
+        }
+    });
+
+    console.log(`Hóspede com mais tempo de estadia: ${hospedeComMaiorEstadia.cpf}`);
+    return hospedeComMaiorEstadia;
+}
 
 
 // Fazer menu
+let testeMenu = true;
+while (testeMenu === true){
+    let opcao = Number(prompt("Escolha uma opção: 1: Cadastrar um novo hóspede. 2: Registrar saída de um hóspede. 3: Listar quartos disponíveis. 4: Listar todos os hóspedes atualmente hospedados. 5: Determinar o hóspede com a estadia mais longa. 6: Encerrar o programa"));
+    switch (opcao) {
+        case 1:
+            cadastraHospede();
+            break;
+
+        case 2:
+            const hosp = Number(prompt("Digite o CPF do hospede para fazer o checkout: "));
+            saidaHospede(hosp);
+            break;
+
+        case 3:
+            quartoDisponivel(quartos);
+            break;
+
+        case 4:
+            consulta(hospedes);
+            break;
+
+        case 5:
+            hospedeComMaisTempo(hospedes);
+            break;
+
+        case 6:
+            testeMenu = false;
+            break;
+
+        default:
+            console.log("Opção inválida, digite novamente");
+    }
+}

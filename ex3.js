@@ -22,3 +22,17 @@ consultarProdutos(estoque): Exibe a lista de todos os produtos cadastrados.
 produtoMaisCaro(estoque): Determina e exibe o produto com o maior valor unitário.
 produtosBaixoEstoque(estoque): Lista produtos com quantidade inferior a 5 unidades */
 
+
+//Função cadastro de produtos
+
+
+//Função consulta de estoque
+
+
+//Função atualização de quantidade
+
+
+//Função do produto mais caro
+
+
+//Menu de interatividade (fazendo if else)
