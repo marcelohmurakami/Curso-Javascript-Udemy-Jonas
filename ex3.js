@@ -103,7 +103,12 @@ const cadastroProdutos = function(){
 const consulta = function(produtos){
     while(true){
         const escolha = Number(prompt("Voce deseja consultar pelo código ou nome? (1- para código. 2- para nome"));
-
+        if (escolha === 1 || escolha === 2){
+            break;
+        } else {
+            console.log("Digite uma opção válida.")
+        }
+        
     if (escolha === 1){
         const cod = Number(prompt("Informe o código do produto: "));
         let teste = 0;
@@ -130,8 +135,8 @@ const consulta = function(produtos){
         if (teste == 0){
             console.log("Produto de nome inexistente!");
         }
-    } else {
-        console.log("Opção inválida, por favor, digite novamente!");
+    }
+
     }
 }
 
@@ -168,8 +173,8 @@ const atualiza = function (produtos){
                     console.log("Opção inválida!");
                 }
             }
+            break;
         }
-        break; 
     }
     if (encontrado === false){
         console.log("Produto inexistente!");
