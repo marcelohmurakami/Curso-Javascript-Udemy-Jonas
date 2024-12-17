@@ -217,6 +217,7 @@ const [{keywords: tags}] = books;
 //Assignment 2.3
 const[ , , , , {language, programmingLanguage = 'unknown'}] = books;
 //console.log(language, programmingLanguage);
+//console.log(language, programmingLanguage);
 
 //Assignment 2.4
 let bookTitle = 'unknown';
@@ -224,15 +225,51 @@ let bookAuthor = 'unknown';
 
 [{title: bookTitle, author: bookAuthor}] = books;
 //console.log(bookTitle, bookAuthor);
+//console.log(bookTitle, bookAuthor);
 
 //Assignment 2.5
 const {thirdParty: {goodreads: {rating: bookRating}}} = books[0];
+//console.log(bookRating);
 //console.log(bookRating);
 
 //Assignment 2.6
 books[0].printBookInfo({
   title, author
 });
+
+//Assignement 4.1
+const [mainKeyword, ...rest] = books[0].keywords;
+//console.log(mainKeyword, rest);
+
+//Assignment 4.2
+const {publisher: bookPublisher, ...restOfTheBook} = books[1];
+//console.log(bookPublisher, restOfTheBook);
+
+//Assignment 4.3
+const printBookAuthorsCount = function (title, ...authors) {
+  //console.log(`The book ${title} has ${authors.length} authors`);
+}
+
+//printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
+
+//Assignement 5.1
+const hasExamplesInJava = function (book) {
+  //console.log(book.programmingLanguage === 'Java' || 'No data avalaible' );
+}
+const chooseBook = Number(prompt('Digite o número do livro: '));
+hasExamplesInJava(books[chooseBook]);
+
+//Assignement 5.2
+for (let a = 0; a < books.length; a++) {
+  //console.log(books[a].onlineContent &&  `${books[a].title} provides online content`);
+}
+
+//Assignement 6.1
+for (let a = 0; a < books.length; a++) {
+  console.log(books[a].onlineContent ?? `${books[a].title} provides no data about its online content`);
+}
+
+console.log('Jonas' && 'Marcelo');
 
 //Assignment 3.1
 const bookAuthors = [...books[0].author, ...books[1].author];

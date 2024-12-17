@@ -22,6 +22,22 @@ const mexicanFoods = new Set([
   'garlic',
 ]);
 
+const weekDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -34,22 +50,9 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.starterMenu[mainIndex]];
   },
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  openingHours,
 
-  orderDelivery: function ({
+  orderDelivery ({
   time = '20:00',
   adress = 'Salim Emer, 331',
   mainIndex = 1,
@@ -58,8 +61,13 @@ const restaurant = {
     console.log(`Pedido redebido. Horário de entrega: ${time}, endereço: ${adress}, pedido ${this.mainMenu[mainIndex]} e entrada ${this.starterMenu[starterIndex]}`)
   },
 
-  orderPasta: function (item1, item2, item3) {
+  orderPasta (item1, item2, item3) {
     console.log(`Aqui está sua deliciosa pasta com ${item1}, ${item2} e ${item3}`)
+  },
+
+  orderPizza (mainIngrediant, ...otherIngredients) {
+    console.log(mainIngrediant);
+    console.log(otherIngredients);
   }
 
 };
@@ -89,7 +97,7 @@ console.log(a, b, c);
 
 
 //DESESTRUTURANDO OBJETOS
-const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
+/*const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
 
 const { menu = [], starterMenu: starters = []} = restaurant;
 console.log(menu, starters);
@@ -105,13 +113,13 @@ const obj = {a: 23, b: 7, c: 14};
 
 //Nested objects
 const {fri: {open: abertura}} = restaurant.openingHours;
-console.log(abertura);
+console.log(abertura);*/
 
 
 
 
 //THE SPREAD OPERATOR
-const arr = [7, 8, 9];
+/*const arr = [7, 8, 9];
 const newArr = [1, 2, ...arr];
 console.log(newArr);
 
@@ -135,4 +143,64 @@ const ingredients = [prompt('Lets make pasta! Ingredient 1: '), prompt('Lets mak
 restaurant.orderPasta(...ingredients);
 
 const newRestaurant = {foundedYear: 2009, ...restaurant, founder: 'Marcelinho'};
- console.log(newRestaurant);
+
+const mostrarNumeros = function (num1, num2, num3, num4, num5) {
+  console.log(num1, num2, num3, num4, num5);
+}
+const nums = [1, 2, 3, 4, 5];
+mostrarNumeros(...nums);*/
+
+
+//REST PATTERN
+/*
+const [pizza, , risotto, ...otherFoods] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, risotto, otherFoods);
+
+const { sat, ...weekDays} = restaurant.openingHours;
+console.log(weekDays);
+
+const add = function (...numbers) {
+  let sum = 0;
+  for (let a = 0; a < numbers.length; a++) {
+    sum = sum + numbers[a];
+  }
+  console.log(sum);
+}
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5,3 ,1 ,6 ,7);
+
+restaurant.orderPizza('Mussarela', 'presunto', 'frango', 'batta palha');*/
+
+const rest1 = {
+  name: 'Capri',
+  //numGuests: 20,
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Leclerc',
+};
+
+//rest1.numGuests = rest1.numGuests || 10;
+//rest2.numGuests = rest1.numGuests || 10;
+rest1.numGuests ??= 10;
+rest2.numGuests ||= 10;
+//console.log(rest1.numGuests);
+//console.log(rest2.numGuests);
+
+rest1.owner ||= 'ANONYMOUS';
+rest2.owner ||= 'ANONYMOUS';
+//console.log(rest1.owner);
+//console.log(rest2.owner);
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+
+
