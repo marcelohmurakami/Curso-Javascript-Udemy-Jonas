@@ -208,28 +208,41 @@ const [umaEstrela = 0, cincoEstrelas = 0, tresEstrelas = 0] = ratingStars;
 
 //Assignment 2.1
 const [{title, author, ISBN}] = books;
-console.log(title, author, ISBN);
+//console.log(title, author, ISBN);
 
 //Assignemnt 2.2
 const [{keywords: tags}] = books;
-console.log(tags);
+//console.log(tags);
 
 //Assignment 2.3
 const[ , , , , {language, programmingLanguage = 'unknown'}] = books;
-console.log(language, programmingLanguage);
+//console.log(language, programmingLanguage);
 
 //Assignment 2.4
 let bookTitle = 'unknown';
 let bookAuthor = 'unknown';
 
 [{title: bookTitle, author: bookAuthor}] = books;
-console.log(bookTitle, bookAuthor);
+//console.log(bookTitle, bookAuthor);
 
 //Assignment 2.5
 const {thirdParty: {goodreads: {rating: bookRating}}} = books[0];
-console.log(bookRating);
+//console.log(bookRating);
 
 //Assignment 2.6
 books[0].printBookInfo({
   title, author
-})
+});
+
+//Assignment 3.1
+const bookAuthors = [...books[0].author, ...books[1].author];
+console.log(bookAuthors);
+
+//Assignment 3.2
+const spellWorld = function (palavra) {
+  return [...palavra , ];
+}
+
+const word = prompt('Digite uma palavra: ');
+const resultado = spellWorld (word);
+console.log(resultado);

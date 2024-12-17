@@ -135,3 +135,4 @@ const ingredients = [prompt('Lets make pasta! Ingredient 1: '), prompt('Lets mak
 restaurant.orderPasta(...ingredients);
 
 const newRestaurant = {foundedYear: 2009, ...restaurant, founder: 'Marcelinho'};
+ console.log(newRestaurant);
