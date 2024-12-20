@@ -256,8 +256,8 @@ const printBookAuthorsCount = function (title, ...authors) {
 const hasExamplesInJava = function (book) {
   //console.log(book.programmingLanguage === 'Java' || 'No data avalaible' );
 }
-const chooseBook = Number(prompt('Digite o número do livro: '));
-hasExamplesInJava(books[chooseBook]);
+//const chooseBook = Number(prompt('Digite o número do livro: '));
+//hasExamplesInJava(books[chooseBook]);
 
 //Assignement 5.2
 for (let a = 0; a < books.length; a++) {
@@ -266,20 +266,73 @@ for (let a = 0; a < books.length; a++) {
 
 //Assignement 6.1
 for (let a = 0; a < books.length; a++) {
-  console.log(books[a].onlineContent ?? `${books[a].title} provides no data about its online content`);
+  //console.log(books[a].onlineContent ?? `${books[a].title} provides no data about its online content`);
 }
 
-console.log('Jonas' && 'Marcelo');
+//console.log('Jonas' && 'Marcelo');
 
 //Assignment 3.1
 const bookAuthors = [...books[0].author, ...books[1].author];
-console.log(bookAuthors);
+//console.log(bookAuthors);
 
 //Assignment 3.2
 const spellWorld = function (palavra) {
   return [...palavra , ];
 }
 
-const word = prompt('Digite uma palavra: ');
-const resultado = spellWorld (word);
-console.log(resultado);
+//const word = prompt('Digite uma palavra: ');
+//const resultado = spellWorld (word);
+//console.log(resultado);
+
+//Assignment 8.1
+let pageSum = 0;
+
+for (const book of books) {
+  pageSum += book.pages;
+}
+//console.log(pageSum);
+
+//Assignment 8.2
+const allAuthors = [];
+
+for (const item of books) {
+  if (typeof item.author === "string") {
+    allAuthors.push(item.author);
+  } else {
+    for (const autor of item.author) {
+      allAuthors.push(autor)
+    }
+  }
+}
+//console.log(allAuthors);
+
+//Assignment 8.3
+for (const [index, book] of allAuthors.entries()) {
+  //console.log(Author ${index + 1}: ${book});
+}
+
+//Assignment 9.1
+const getFirstKeyword = function (book) {
+  //console.log(book?.keywords[0]);
+}
+getFirstKeyword (books[0]);
+
+
+//Assignment 11.1
+const entries = [];
+for (const book of Object.keys(books[0].thirdParty.goodreads)) {
+  entries.push(book);
+};
+//console.log(entries);
+
+//Assignment 11.2
+for (const [index, book] of Object.entries(books[0].thirdParty.goodreads).entries()) {
+  entries.push(`Index ${index + 1}: ${book}`);
+}
+//console.log(entries);
+
+
+//Assignment 11.3
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+console.log(entries)
+console.log(entries2)

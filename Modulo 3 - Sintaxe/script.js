@@ -200,7 +200,51 @@ const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 for (const item of menu) console.log(item);
 
 for (const [i, el] of menu.entries()) {
-  console.log(`${i + 1}: ${el}`);
+  //console.log(`${i + 1}: ${el}`);
 }
 
+
+//Optional Chaining
+//console.log(restaurant.openingHours.mon?.open);
+//console.log(restaurant.openingHours?.mon?.open);
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  //console.log(`On ${day} we open at ${open}`);
+}
+
+//console.log(restaurant.order?.(1, 3, 4) ?? 'Função não existe');
+//console.log(restaurant.orderRisoto?.(1, 3, 4) ?? 'Função não existe');
+
+const users = [
+  {name: 'Jonas', email: 'naosei@gmail.com'}
+];
+//console.log(users[0]?.name ?? 'User dont exist');
+//console.log(users[9]?.name ?? 'User dont exist');
+
+
+//LOOPING OBJECTS
+for (const day of Object.keys(openingHours)) {
+ // console.log(day);
+}
+
+const properties = Object.keys(openingHours);
+
+let openStr = `We are open in ${properties.length} days: `
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+//console.log(openStr);
+
+const values = Object.values(openingHours);
+//console.log(values);
+
+
+const entries = Object.entries(openingHours);
+//console.log(entries);
+
+for (const [key, open] of entries) {
+  //console.log(`On ${key} we open at ${open} and close at`)
+}
 
