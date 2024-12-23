@@ -217,7 +217,6 @@ const [{keywords: tags}] = books;
 //Assignment 2.3
 const[ , , , , {language, programmingLanguage = 'unknown'}] = books;
 //console.log(language, programmingLanguage);
-//console.log(language, programmingLanguage);
 
 //Assignment 2.4
 let bookTitle = 'unknown';
@@ -225,11 +224,9 @@ let bookAuthor = 'unknown';
 
 [{title: bookTitle, author: bookAuthor}] = books;
 //console.log(bookTitle, bookAuthor);
-//console.log(bookTitle, bookAuthor);
 
 //Assignment 2.5
 const {thirdParty: {goodreads: {rating: bookRating}}} = books[0];
-//console.log(bookRating);
 //console.log(bookRating);
 
 //Assignment 2.6
