@@ -248,3 +248,128 @@ for (const [key, open] of entries) {
   //console.log(`On ${key} we open at ${open} and close at`)
 }
 
+
+// MAPS
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Roma, Italy');
+rest.set(2, 'Sao Paulo, Brazil');
+console.log(rest);
+
+rest 
+  .set('categories', ['Italian', 'Mexican', 'Barbacue'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are not open');
+
+console.log(rest.get('categories'));
+console.log(rest.get(true));
+console.log(rest.get('close'));
+
+const time = 8;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+console.log(rest.has('name'));
+rest.delete(2);
+
+const arr = [1, 2];
+rest.set(arr, 'test');
+console.log(rest.get(arr));
+
+
+//MAPS ITERATION
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'Javascript'],
+  ['Correct', 3],
+  [true, 'Correct'],
+  [false, 'Wrong'],
+]);
+
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+console.log(question.get('question'));
+for (const [ley, value] of question) {
+  if (typeof key === 'number') console.log(`Awner ${key}: ${value}`);
+}
+const awnser = Number(prompt('Chute sua resposta: '))
+console.log(question.get(awnser === question.get('Correct')));
+ 
+
+//STRINGS
+const airline = 'TAP Air Portugal';
+//const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(airline.length);
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+console.log(airline.slice(0, lastIndexOf(' ')));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  const letter = seat.slice(-1);
+  if (letter === 'B' || letter === 'E') {
+    console.log('You got a Middle Seat')
+  } else {
+    console.log('You are in the pitches')
+  }
+}
+console.log(checkMiddleSeat('34B'));
+console.log(checkMiddleSeat('56E'));
+console.log(checkMiddleSeat('4A'));
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+const passanger = 'MaRcElO';
+const passangerLower = passanger.toLowerCase();
+const passangerCorrect = passangerLower[0].toUpperCase() + passangerLower.slice(1);
+console.log(passangerCorrect);
+
+const email = 'marcelo@gmail.com';
+const loginEmail = '  Marcelo@Gmail.COM ';
+const emailLower = loginEmail.toLowerCase();
+const emailTrimmed = emailLower.trim();
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail); //Criar uma função para verificar se é igual
+
+const priceGB = '288,97$';
+const priceUS = priceGB.replace('$', 'R$').replace(',', '.');
+console.log(priceUS);
+
+const annoucement = 'All passangers come to door 23. Please come to door 23';
+console.log(annoucement.replaceAll('door', 'gate'));
+ 
+console.log(annoucement.replace(/door/g, 'gate'));
+
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Air'));
+console.log(plane.startsWith('A'));
+
+if(newPlane.startsWith('Airbus') && newPlane.endsWith('neo')) console.log('Part of the new AIRBUS family')
+  else console.log('Dont make part of the new airbus family');
+
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are not allowed on board')
+  } else {
+    console.log('Welcome aboard')
+  }
+}
+checkBaggage('i have a laptop, some food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('got somes snacks and a gun for protect');
