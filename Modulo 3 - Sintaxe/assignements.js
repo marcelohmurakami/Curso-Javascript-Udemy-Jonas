@@ -331,5 +331,109 @@ for (const [index, book] of Object.entries(books[0].thirdParty.goodreads).entrie
 
 //Assignment 11.3
 const entries2 = Object.entries(books[0].thirdParty.goodreads);
-console.log(entries)
-console.log(entries2)
+//console.log(entries)
+//console.log(entries2)
+
+
+//Assignments 13.1
+const bookMap = new Map ([
+  ['title', 'clean code'],
+  ['author', 'Robert C. Martin']
+]);
+
+
+//Assignment 13.2
+bookMap.set('pages', 464);
+//console.log(bookMap);
+
+
+//Assignment 13.3
+//console.log(`${bookMap.get('title')} by ${bookMap.get('author')}`);
+
+
+//Assignment 13.4
+//console.log(bookMap.size);
+
+
+//Assignment 13.5
+//console.log(bookMap.get('author') ? 'The book has a known author' : 'The book dont have a known author');
+
+
+//Assignment 14.1
+const firstBookMap = new Map (Object.entries(books[0]));
+//console.log(firstBookMap);
+
+
+//Assignment 14.2
+for (const [key, value] of firstBookMap) {
+  if (typeof value === 'number') {
+    //console.log(key);
+  }
+}
+
+
+//Assignment 15.1
+console.log(books[0].ISBN[6], books[0].ISBN[4], books[0].ISBN[9], books[0].ISBN[8]);
+
+
+//Assignment 15.2
+const quote = 'A computer once beat me at chess, but it was no match for me at kick boxing';
+//console.log(quote.indexOf('chess'));
+
+
+
+//Assignment 15.3
+//console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+
+
+//Assignment 15.4
+const isContributor = function (author) {
+  return author.includes('Contributor') ? true : false;
+}
+const teste = isContributor('Julie Sussman');
+//console.log(teste);
+
+
+//Assignment 16.1
+const normalizeAuthorName = function (authorName) {
+  const nameMinusculo = authorName.toLowerCase().trim();
+  console.log(nameMinusculo);
+  let nameCerto, firstName, lastName
+  if (nameMinusculo.includes('(contributor)')) {
+    nameCerto = nameMinusculo.slice(0, nameMinusculo.lastIndexOf(' '));
+    console.log(nameCerto);
+    firstName = nameCerto[0].toUpperCase() + nameCerto.slice(1, nameCerto.indexOf(' '));
+    lastName = nameCerto.slice(nameCerto.indexOf(' ') + 1);
+    lastName = lastName[0].toUpperCase() + lastName.slice(1);
+    console.log(firstName, lastName);
+  }
+}
+normalizeAuthorName('  JuliE sussMan (Contributor)');
+
+
+
+//Assignment 17.1
+const logBookCategories = function (bookCategories) {
+  return bookCategories.split(';');
+}
+
+const bookCategories = 'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+const booksArray = logBookCategories(bookCategories);
+
+
+//Assignment 17.2
+const getKeywordsAsString = function (booksArray) {
+  console.log(booksArray.join(';'));
+}
+getKeywordsAsString(booksArray);
+
+
+//Assignment 17.3
+const logBookChapters = function (bookChapters) {
+  for (const [name, pages] of bookChapters) {
+    const tamanho = 15;
+    console.log(name.padEnd(tamanho, '-') + pages);
+  }
+}
+const bookChapters = [['The Basics', 14], ['Sorting', 254], ['Searching', 372], ['Graphs', 526], ['Strings', 706]];
+logBookChapters(bookChapters);

@@ -152,3 +152,194 @@ for (const player of game.scored) {
   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 */
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+*/
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+//2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+gameEvents.delete(64);
+console.log(gameEvents);
+
+
+//3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+const qtdEvents = 90 / (gameEvents.size);
+console.log(`An event happened, on average, every ${qtdEvents} minutes`);
+
+
+//4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+//[FIRST HALF] 17: ⚽️ GOAL
+for (const [time, event] of gameEvents) {
+  console.log(time <= 45 ? `[FIRST HALF] ${time}: ${event}` : `[SECOND HALF] ${time}: ${event}`);
+}
+
+// Coding Challenge #4
+
+
+/*Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+const button = document.querySelector('button');
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const palavras = text.split('\n');
+  let certinho = 1;
+  const espacamento = 20;
+  for (const palavra of palavras) {
+    const allLowerCase = palavra.toLowerCase().trim();
+    const firstWord = allLowerCase.slice(0, allLowerCase.indexOf('_'));
+    let secondWord = allLowerCase.slice(allLowerCase.indexOf('_') + 1);
+    secondWord = secondWord[0].toUpperCase() + secondWord.slice(1);
+    const finalWord = firstWord + secondWord;
+    console.log(finalWord.padEnd(espacamento, ' ') + '✅'.padStart(certinho, '✅'));
+    certinho++
+}})
+//palavra('underscore_case',' first_name', 'Some_Variable', ' calculate_AGE', 'delayed_departure');
+
+
+
+/*
+///////////////////////////////////////
+// String Methods Practice
+
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)*/
+
+const flights = '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+const flightsArr = flights.split('+');
+
+const frase = function (flightSplit) {
+  return `${flightSplit[0].replaceAll('_', ' ').replace(';', ' from ').replaceAll(';', ' ')} from ${flightSplit[1].slice(0, 3).toUpperCase()} to ${flightSplit[2].slice(0, 3).toUpperCase()} (${flightSplit[3].replace(':', 'h')})`; 
+}
+
+for (const fligth of flightsArr) {
+  const tamanhoFrase = 50;
+  const flightSplit = fligth.split(';');
+
+  if (fligth.includes('Delayed')) {
+    const flight = `🔴 ${frase(flightSplit)}`;
+    console.log(flight.padStart(tamanhoFrase, ' '));
+  } 
+  else {
+    const flight = frase(flightSplit);
+    console.log(flight.padStart(tamanhoFrase, ' '));
+  }
+}
+
+const championship = {
+  matches: [
+    {
+      team1: 'Barcelona',
+      team2: 'Real Madrid',
+      score: '2:1',
+      scored: ['Messi', 'Benzema', 'Messi'],
+      odds: {
+        team1: 1.5,
+        draw: 3.5,
+        team2: 4.0,
+      },
+    },
+    {
+      team1: 'Manchester City',
+      team2: 'Liverpool',
+      score: '1:3',
+      scored: ['Salah', 'De Bruyne', 'Salah', 'Firmino'],
+      odds: {
+        team1: 2.0,
+        draw: 3.0,
+        team2: 2.5,
+      },
+    },
+  ],
+};
+
+// TAREFAS:
+
+// 1. Crie uma função `generateReport` que recebe o objeto `championship` e retorna um relatório detalhado de cada partida.
+// - Para cada partida, exiba: 
+//    - Os times que jogaram, o placar e os jogadores que marcaram.
+//    - Qual time tinha mais chance de ganhar (com base nas odds).
+
+// 2. Crie um array com os nomes únicos dos jogadores que marcaram gols em todo o campeonato (use `Set`).
+
+// 3. Calcule a média das odds de todas as partidas e exiba o resultado.
+
+// 4. Para cada partida, calcule qual foi o intervalo médio de tempo entre os gols (assuma que os gols estão distribuídos uniformemente nos 90 minutos).
+
+// 5. Use `padStart` para formatar o relatório com uma aparência bonita, ex: 
+// "Match: Barcelona vs Real Madrid"
+// "Score: 2:1"
+// "Top Scorer: Messi"
+
+// 6. Bônus: Crie um objeto chamado `topScorers` que mostre quantos gols cada jogador marcou em todo o campeonato.
+
+
+/*Listar os nomes e posições dos jogadores:
+Crie um código que percorra o array de jogadores e imprima no console uma frase no formato:
+"Jogador: Ronaldo - Posição: Forward"
+
+Adicionar um jogador ao time:
+Escreva uma função que receba os dados de um novo jogador (nome, posição, gols e assistências) e retorne uma nova lista de jogadores contendo o jogador adicionado, sem modificar a lista original.
+
+Verificar se um jogador está no time:
+Escreva uma função que procure um jogador pelo nome e retorne:
+
+O objeto com as informações do jogador, caso ele exista.
+null, caso não seja encontrado.
+Criar uma lista com informações dos jogadores e suas posições:
+Escreva um código que gere um novo array contendo frases no formato:
+["Ronaldo joga como Forward", "Messi joga como Forward", "De Bruyne joga como Midfielder"]
+
+Mostrar as estatísticas de um jogador como frase:
+Crie uma função que receba o nome de um jogador e retorne uma frase no formato:
+"Ronaldo marcou 12 gols e deu 4 assistências."
+Se o jogador não for encontrado, exiba uma mensagem dizendo que ele não está no time.*/

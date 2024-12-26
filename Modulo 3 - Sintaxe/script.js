@@ -293,7 +293,7 @@ const hoursMap = new Map(Object.entries(openingHours));
 console.log(hoursMap);
 
 console.log(question.get('question'));
-for (const [ley, value] of question) {
+for (const [key, value] of question) {
   if (typeof key === 'number') console.log(`Awner ${key}: ${value}`);
 }
 const awnser = Number(prompt('Chute sua resposta: '))
@@ -373,3 +373,43 @@ const checkBaggage = function (items) {
 checkBaggage('i have a laptop, some food and a pocket Knife');
 checkBaggage('Socks and camera');
 checkBaggage('got somes snacks and a gun for protect');
+
+
+console.log('Marcelo Murakami'.split(' '));
+const [firstName, lastName] = ('Marcelo Murakami'.split(' '));
+console.log(firstName, lastName);
+
+const newName = ['Mr.', firstName, lastName].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+  }
+  console.log(namesUpper.join(' '));
+}
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('Marcelo murakami');
+
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+'));
+console.log('Jonas'.padStart(25, '+'));
+console.log('Marcelo'.padEnd(50, '!'));
+
+
+const maskCreditCard = function (number) {
+  const str = String(number);
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+}
+console.log(maskCreditCard(1234123412341234));
+maskCreditCard('7465829308567124');
+
+
+const message2 = 'Bad weather... All departues delayed...';
+console.log(message2.repeat(10));
+
