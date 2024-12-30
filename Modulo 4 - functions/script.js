@@ -209,3 +209,65 @@ const addTax2 = function (rate) {
 
 const tax1 = addTax2 (0.2);
 console.log(tax1(200));
+
+
+//IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (função que só é chamada uma vez e dps desaparece)
+(function () {
+    console.log('This will never run again');
+    const isPrivate = 23;
+})(); //Invoca entre parenteses e chama ela imediatamente
+
+console.log(isPrivate); //ERROOO
+
+
+//CLOSURES 
+const secureBooking = function () {
+    let passangerCount = 0;
+
+    return function () {
+        passangerCount++;
+        console.log(`${passangerCount} passagers`);
+    }
+}
+
+const booker = secureBooking();
+booker();
+booker();
+booker(); 
+//Uma função SEMPRE vai ter acesso as variáveis do contexto de execução (escopo) que ela foi criada, mesmo após ela ter desaparecido, isso se da através do CLOSURE
+//a FUNÇÃO NÃO PERDE CONEXÃO COM AS VARIÁVEIS DA FUNÇÃO PAI
+
+let f;
+
+const g = function () {
+    const a = 23,
+    f = function () {
+        console.log(a * 2)
+    };
+};
+
+const h = function () {
+    const b = 777,
+    f = function () {
+        console.log(b * 777);
+    }
+}
+
+g();
+f(); //A função f contem a constante a ''salva'' pelo closure
+
+h();
+f(); //A função vira a função dentro da const h, perde a variável a do closure mas entra a variável b
+
+
+
+const boardPassagers = function (n, wait) {
+    const perGroup = n / 3;
+
+    setTimeout(function(){
+        console.log(`We are boarding all ${n} passagers`);
+        console.log(`The are 3 groups, each with ${perGroup} passangers`)
+    }, wait * 1000)
+    console.log(`Will start boarding in ${wait} seconds`);
+}
+boardPassagers(180, 3);
