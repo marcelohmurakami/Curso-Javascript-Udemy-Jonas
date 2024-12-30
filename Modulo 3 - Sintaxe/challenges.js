@@ -275,6 +275,13 @@ for (const fligth of flightsArr) {
   }
 }
 
+
+
+
+
+
+
+
 const championship = {
   matches: [
     {
@@ -309,37 +316,133 @@ const championship = {
 //    - Os times que jogaram, o placar e os jogadores que marcaram.
 //    - Qual time tinha mais chance de ganhar (com base nas odds).
 
-// 2. Crie um array com os nomes únicos dos jogadores que marcaram gols em todo o campeonato (use `Set`).
+const generateReport = function (championship) {
+  for (const [key, match] of championship.matches.entries()) {
+    const {team1: time1, team2: time2} = match;
+    const [scorer1, scorer2, scorer3, scorer4] = match.scored;
+    console.log(`Os times que jogaram no jogo ${key + 1} foram ${time1} vs ${time2}, o placar foi de ${match.score} e quem marcou os gols foram ${scorer1}, ${scorer2}, ${scorer3}, ${scorer4}`);
+
+    console.log(`O time com mais chances de ganhar era ${match.odds.team1 < match.odds.team2 ? match.team1 : match.team2}`);
+  }
+}
+
+generateReport(championship);
+
+// 2. Crie um array com os nomes únicos dos jogadores que marcaram gols em todo o campeonato.
+const allPlayersHowScored = [...championship.matches[0].scored, ...championship.matches[1].scored];
+console.log(allPlayersHowScored);
 
 // 3. Calcule a média das odds de todas as partidas e exiba o resultado.
+let somaOdds = 0;
+let qtdOds = 0;
+const oddsPraMedia = [...Object.values(championship.matches[0].odds), ...Object.values(championship.matches[1].odds)];
+
+for (const odd of oddsPraMedia) {
+  somaOdds += odd;
+  qtdOds++;
+}
+
+console.log(`A média das odds foi de: ${somaOdds / qtdOds}`);
 
 // 4. Para cada partida, calcule qual foi o intervalo médio de tempo entre os gols (assuma que os gols estão distribuídos uniformemente nos 90 minutos).
+for (const match of championship.matches) {
+  console.log(`O intervalo medio de tempo entre os gols na partida foi de ${90 / match.scored.length}`);
+}
 
 // 5. Use `padStart` para formatar o relatório com uma aparência bonita, ex: 
 // "Match: Barcelona vs Real Madrid"
 // "Score: 2:1"
 // "Top Scorer: Messi"
+const tamArray = 40;
+for (const match of championship.matches) {
+  console.log(`Match: ${match.team1} vs ${match.team2}`.padStart(tamArray, ' '));
+  console.log(`Score: ${match.score}`.padStart(tamArray, ' '));
+
+let scorers = {};
+  for (const scorerInMatch of match.scored) {
+    scorers[scorerInMatch] ? scorers[scorerInMatch]++ : scorers[scorerInMatch] = 1;
+  }
+console.log(scorers);
+
+let topScorer
+}
+
 
 // 6. Bônus: Crie um objeto chamado `topScorers` que mostre quantos gols cada jogador marcou em todo o campeonato.
 
 
+
+
+const fantasyTeam = {
+  teamName: 'Dream FC',
+  players: [
+    { name: 'Ronaldo', position: 'Forward', goals: 12, assists: 4 },
+    { name: 'Messi', position: 'Forward', goals: 15, assists: 6 },
+    { name: 'De Bruyne', position: 'Midfielder', goals: 5, assists: 12 },
+  ],
+};
+
+
 /*Listar os nomes e posições dos jogadores:
 Crie um código que percorra o array de jogadores e imprima no console uma frase no formato:
-"Jogador: Ronaldo - Posição: Forward"
+"Jogador: Ronaldo - Posição: Forward"*/
+for (const player of fantasyTeam.players) {
+  const {name: jogador, position: posicao} = player;
+  //console.log(`Jogador: ${jogador} - Posição: ${posicao}`);
+}
 
-Adicionar um jogador ao time:
-Escreva uma função que receba os dados de um novo jogador (nome, posição, gols e assistências) e retorne uma nova lista de jogadores contendo o jogador adicionado, sem modificar a lista original.
 
-Verificar se um jogador está no time:
-Escreva uma função que procure um jogador pelo nome e retorne:
+/*Adicionar um jogador ao time:
+Escreva uma função que receba os dados de um novo jogador (nome, posição, gols e assistências) e retorne uma nova lista de jogadores contendo o jogador adicionado, sem modificar a lista original.*/
+const newList = function (fantasyTeam) {
+  const newFantasyTeam = {...fantasyTeam}
+  newFantasyTeam.players.push({name: 'Garro', position: 'Midfielder', goals: 59, assists: 192});
+  //console.log(newFantasyTeam);
+}
+newList (fantasyTeam);
 
+
+/*Verificar se um jogador está no time:
+Escreva uma função que procure um jogador pelo nome e retorne:*/
+const includeInTheTeam = function (jogador, fantasyTeam) {
+  for (const player of Object.values(fantasyTeam.players)) {
+    console.log(player);
+    if (player.name.includes(jogador)) {
+      console.log('O jogador está no time!');
+    }
+  }
+}
+includeInTheTeam ('Messi', fantasyTeam);
+
+/*
 O objeto com as informações do jogador, caso ele exista.
 null, caso não seja encontrado.
 Criar uma lista com informações dos jogadores e suas posições:
 Escreva um código que gere um novo array contendo frases no formato:
 ["Ronaldo joga como Forward", "Messi joga como Forward", "De Bruyne joga como Midfielder"]
+*/
+let jogadorEncontrado = false;
+let frasee;
+for (const jogador of fantasyTeam.players) {
+  if (jogador.name.includes('Bela')) {
+    jogadorEncontrado = jogador;
+    frasee = `${jogador.name} joga como ${jogador.position}`
+  }
+}
+console.log(frasee || null);
 
+/*
 Mostrar as estatísticas de um jogador como frase:
 Crie uma função que receba o nome de um jogador e retorne uma frase no formato:
 "Ronaldo marcou 12 gols e deu 4 assistências."
 Se o jogador não for encontrado, exiba uma mensagem dizendo que ele não está no time.*/
+let encontrouOJogador = false;
+
+for (const jogador of fantasyTeam.players) {
+  if (jogador.name.includes('Ronaldo')) {
+    encontrouOJogador = `${jogador.name} marcou ${jogador.goals} gols e deu ${jogador.assists} e assistências`
+    break;
+  }
+
+  console.log(encontrouOJogador || null);
+}
