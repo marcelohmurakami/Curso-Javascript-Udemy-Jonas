@@ -61,10 +61,14 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-    movements.forEach(function(mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => {
+    return a - b;
+  }) : movements;
+
+    movs.forEach(function(mov, i) {
       const type = mov > 0 ? 'deposit' : 'withdrawal';
 
       const html = `       
@@ -229,6 +233,14 @@ btnClose.addEventListener('click', function(e) {
 
   inputClosePin.value = inputCloseUsername.value = '';
 });
+
+let sorted = false; 
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
 
 
 
@@ -401,7 +413,7 @@ const lastBigMov = movements.findLastIndex((mov) => {
 console.log(`Your latest movement was ${movements.length - lastBigMov} movements ago`);*/
 
 
-
+/*
 //SOME AND EVERY
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const havePositive = movements.some((mov) => { //SOME É MT PARECIDO COM INCLUDES, MAS O INCLUDES VERIFICA IGUALDADE, O SOME VERIFICA CONDIÇÃO
@@ -458,4 +470,134 @@ const accountMovements2 = accounts.flatMap ((mov) => {
 }).reduce((acc, mov) => {
   return acc + mov;
 })
-console.log(accountMovements2);
+console.log(accountMovements2);*/
+
+
+/*
+//SORTING ARRAYS
+const owners = ['Jonas', 'Zach', 'Marcelo', 'Julha'];
+console.log(owners.sort()); //ORDENOU EM ORDEM ALFABÉTICA, MODIFICA O ARRAY ORIGINAL
+
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+console.log(movements.sort()); //VAI DAR RUIM PORQUE ELE ORDENA EM STRINGS, 1 PRIMEIRO 2 DPS ETC EM ORDEM
+
+movements.sort((a, b) => { //A é o elemento atual, B é o próximo elemento
+  if (a > b) {
+    return 1;
+  }
+  if (b > a) {
+    return -1;
+  }
+});
+console.log(movements) //ORDEM CRESCENTE
+
+movements.sort((a, b) => {
+  if (a < b) {
+    return 1;
+  }
+  if (a > b) {
+    return -1;
+  }
+});
+console.log(movements) //ORDEM DECRESCENTE
+
+//OU PODEMOS FAZER ASSIM
+movements.sort((a, b) => {
+  return a - b; //Porque se a for menos vai dar negativo e retornar negativo, e vice versa
+});
+console.log(movements);*/
+
+
+/*
+//ARRAY GROUPING
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const groupedMovements = Object.groupBy((movements, movement) => {
+  return movement > 0 ? 'deposits' : 'withdrawals'
+});
+console.log(groupedMovements);
+
+
+const groupedByActivity = Object.groupBy((accounts, account) => {
+  const movementCounts = account.movements.lenght;
+
+  if (movementCounts >= 8) {
+    return 'very active';
+  } else if (movementCounts >= 4) {
+    return 'Active';
+  } else {
+    return 'Moderate';
+  }
+});
+console.log(groupedByActivity);*/
+
+
+/*
+//FILLING ARRAYS
+const x = new Array(7); //quando passa um argumento, cria um array vazio com o numero de elementos especificado (7 nesse caso)
+//x.fill(1); //O array agora será 1 para todos os 7 elementos
+
+//x.fill(1, 3); //Assim como no Slice, a partir do index 3 todos os elementos serão 1
+
+x.fill(23, 2, 6); //vai colocar 23 no index 2 até o 6
+
+//Array.from
+const y = Array.from({length: 7}, () => 1) //Vai criar um array de 7 posições e colocar 1 em todas as posições
+console.log(y);
+
+const z = Array.from({length: 7}, (_, i) => i + 1);
+console.log(z);
+
+const xy = Array.from({length: 100}, (el) => Math.random() * 100);
+console.log(xy);
+
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent));
+
+  console.log(movementsUI)
+})*/
+
+
+
+//ToReversed, toSorted, toSpliced (NOVOS METODOS IGUAL SEUS ANTECESSORES MAS NÃO ALTERA O ARRAY ORIGINAL)
+//movements.toReversed(); //Inverte sem alterar array
+
+
+
+
+
+
+
+//EXERCICIOS DE ARRAY
+//Somar todos os depósitos do banco
+const bankDepositSum = accounts.flatMap((account) => {
+  return account.movements;
+}).reduce((acc, movement) => {
+  return movement > 0 ? acc + movement : acc;
+});
+console.log(bankDepositSum);
+
+
+//Somar quantos depósitos foram feitos com pelo menos 1000 dolares
+let sumDeposits = 0;
+const deposits1000 = accounts.flatMap((account) => {
+  return account.movements;
+}).forEach((movement) => {
+  if (movement >= 1000) {
+    return ++sumDeposits;
+  }
+});
+console.log(sumDeposits);
+
+
+//Colocar a soma dos depositos e retiradas
+const {deposits, withdrawals} = accounts.flatMap((account) => {
+  return account.movements;
+}).reduce((acc, movement) => {
+  movement > 0 ? (acc.deposits += movement) : (acc.withdrawals += movement);
+  return acc;
+}, {deposits: 0, withdrawals: 0});
+console.log(deposits, withdrawals);
+ 
