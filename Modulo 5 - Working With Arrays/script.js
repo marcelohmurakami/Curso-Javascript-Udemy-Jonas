@@ -600,4 +600,28 @@ const {deposits, withdrawals} = accounts.flatMap((account) => {
   return acc;
 }, {deposits: 0, withdrawals: 0});
 console.log(deposits, withdrawals);
- 
+
+
+//Transformar primeiras letras da frase em maiuscula exceto algumas
+ const convertTitleCase = function (title) {
+    const expections = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+    const titleCase = title.toLowerCase().split(' ');
+
+    const correctTtile = titleCase.map((word) => {
+      let isExpection = false;
+      expections.forEach((expection) => {
+        if (word === expection) {
+          isExpection = true;
+        }
+      });
+
+      return isExpection === true ? word : word[0].toUpperCase() + word.slice(1);;
+    })
+
+    return correctTtile.join(' ');
+ }
+
+ console.log(convertTitleCase('this is a nice tittle'));
+ console.log(convertTitleCase('this is a long title but not too long'));
+ console.log(convertTitleCase('and here is another title with an example'));
