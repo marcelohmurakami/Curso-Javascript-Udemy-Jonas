@@ -26,7 +26,7 @@ const account1 = {
     '2025-01-12T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'pt-BR', // de-DE
 };
 
 const account2 = {
@@ -120,7 +120,7 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-    const date = new Date (acc.movementsDates[i])
+    const date = new Date (acc.movementsDates[i]);
     const displayDate = formatMovement(date, acc.locale);
     const formattedMov = formatCur(mov, acc.locale, acc.currency);
 
@@ -189,13 +189,13 @@ const updateUI = function (acc) {
 
 const startLogOutTimer = function () {
   //Set time to 5 minutes
-  let time = 10;
+  let time = 10000;
   
   //Call the timer every second
   const timer = setInterval(function() {
     console.log(time)
     const min = String(Math.floor(time / 60)).padStart(2, 0);
-    const sec = String(Math.floor(time % 60)).padStart(2, 0);;
+    const sec = String(Math.floor(time % 60)).padStart(2, 0);
 
     labelTimer.textContent = `${min}:${sec}`;
     time--;
@@ -280,6 +280,11 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    //Atualizando a data
+    const transferDate = new Date ();
+    currentAccount.movementsDates.push(transferDate);
+    receiverAcc.movementsDates.push(transferDate);
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -294,6 +299,9 @@ btnLoan.addEventListener('click', function (e) {
     setTimeout(function() {
       // Add movement
       currentAccount.movements.push(amount);
+
+      const transferDate = new Date();
+      currentAccount.movementsDates.push(transferDate);
 
       // Update UI
       updateUI(currentAccount);
