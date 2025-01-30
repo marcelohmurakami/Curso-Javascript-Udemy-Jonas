@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (e) {
   e.preventDefault();  
@@ -31,9 +33,31 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1'); 
 
+// Função de quando clicar no item-nav, rolar até a section
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth'} );
+  };
+});
+
+
+ // Função das operações
+ const tabs = document.querySelectorAll('.operations__tab');
+ const tabsContainer = document.querySelector('.operations__tab-container');
+ const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  const clicked = e.target.closest('.operations__tab');
+  clicked.classList.add('operations__tab--active')
+})
+
+/*
 btnScrollTo.addEventListener('click', function(e) {
     const s1coords = section1.getBoundingClientRect(); // Sempre em relaçao a viewport
     console.log(s1coords) // Varias coordenadas do DOM
@@ -48,7 +72,45 @@ btnScrollTo.addEventListener('click', function(e) {
         top: s1coords.top + window.scrollY,
         behavior: 'smooth',
     });
-})
+});*/
+
+
+
+
+/*
+const h1 = document.querySelector('h1');
+const alertH1 = function(e) {
+  alert('addEventListener: Great! You are reading the heading!');
+
+  // h1.removeEventListener('mouseenter', alertH1); // Vai remover o event listernet após ouvir o event uma vez
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+/* h1.onmouseenter = function(e) {
+  alert('addEventListener: Great! You are reading the heading!')
+}; */
+
+//setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);*/
+
+
+/*
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () => `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function(e) {
+  this.style.backgroundColor = randomColor();
+});
+document.querySelector('.nav__links').addEventListener('click', function(e) {
+  this.style.backgroundColor = randomColor();
+  //e.stopPropagation(); //vai parar a propagação para os elementos pais
+});
+document.querySelector('.nav').addEventListener('click', function(e) {
+  this.style.backgroundColor = randomColor();
+}, true); //Setando para true, mudará a fase para a fase de captura, ou seja de cima pra baixo, enquanto os outros é de baixo para cima
+*/
+
+
 
 ////////////////////////////////
 ////////////////////////////////
@@ -128,3 +190,35 @@ logo.classList.remove('c', 'j');
 logo.classList.toogle('c');
 logo.classList.contains('c');
 logo.className = 'jonas' //Nao usar, mas bom saber da existencia */
+
+/*
+const h1 = document.querySelector('h1');
+
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'black';
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('header').style.background = 'var(--gradient-secondary)';
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+console.log([...h1.parentElement.children]);
+
+[...h1.parentElement.children].forEach((el) => {
+  if (el !==  h1) {
+    el.style.transform = 'scale(0.5)'
+  }
+})/*
