@@ -40,6 +40,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
   if (e.target.classList.contains('nav__link')) {
     const id = e.target.getAttribute('href');
+    console.log(id);
     document.querySelector(id).scrollIntoView({ behavior: 'smooth'} );
   };
 });
@@ -54,8 +55,8 @@ tabsContainer.addEventListener('click', function(e) {
   e.preventDefault();
 
   const clicked = e.target.closest('.operations__tab');
-  clicked.classList.add('operations__tab--active')
-})
+  clicked.classList.add('operations__tab--active');
+});
 
 /*
 btnScrollTo.addEventListener('click', function(e) {
@@ -221,4 +222,4 @@ console.log([...h1.parentElement.children]);
   if (el !==  h1) {
     el.style.transform = 'scale(0.5)'
   }
-})/*
+})*/
