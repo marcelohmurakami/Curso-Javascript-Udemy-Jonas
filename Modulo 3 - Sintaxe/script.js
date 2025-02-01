@@ -412,4 +412,3 @@ maskCreditCard('7465829308567124');
 
 const message2 = 'Bad weather... All departues delayed...';
 console.log(message2.repeat(10));
-
