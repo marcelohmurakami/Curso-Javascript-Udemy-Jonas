@@ -122,8 +122,8 @@ const nave = document.querySelector('.nav');
 const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
-    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-    const logo = link.closest('.nav').querySelector('img');
+    const siblings = nave.querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img'); //Duas formas de fazer
     
     siblings.forEach(el => {
       if (el !== link) {
@@ -160,18 +160,18 @@ const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
-  const [entry] = entries;
-
-  if (entry.isIntersecting === false) {
-    nave.classList.add('sticky');
-  } else {
-    nave.classList.remove('sticky');
-  }
+  entries.forEach(entry => {
+    if (entry.isIntersecting === false) {
+      nave.classList.add('sticky');
+    } else {
+      nave.classList.remove('sticky');
+    }
+  });
 }
 
 const headerObserver = new IntersectionObserver(stickyNav, {
-  root: null,
-  threshold: 0,
+  root: null, // Em relação a viewport
+  threshold: 0, 
   rootMargin: `-${navHeight}px` //adiciona uma margem para a intersecção acontecer
 });
 headerObserver.observe(header)
@@ -186,8 +186,7 @@ const revealSection = function(entries, observer) {
       entry.target.classList.remove('section--hidden');
       observer.unobserve(entry.target); // Para melhorar performance
     }
-  })
-
+  });
 }
 
 const sectionObserver = new IntersectionObserver(revealSection, {
