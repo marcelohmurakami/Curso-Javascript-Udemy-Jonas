@@ -606,3 +606,4 @@ console.log(rivian);
 rivian.brake();
 console.log(rivian);
 rivian.speedUS(150);
+
